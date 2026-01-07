@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
 import { motion } from "framer-motion"
 import Image from 'next/image'
@@ -257,7 +257,7 @@ const PROPERTIES: Property[] = [
   },
 ]
 
-export function Properties() {
+function PropertiesComponent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -382,7 +382,7 @@ export function Properties() {
                         fallbackDiv.innerHTML = `
                           <div class="text-center p-8">
                             <svg class="w-16 h-16 mx-auto mb-4 text-accent/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
                             <div class="w-24 h-1 bg-accent/30 mx-auto mb-4 rounded-full"></div>
                             <p class="text-accent/80 font-medium text-sm uppercase tracking-wider">${prop.title}</p>
@@ -483,5 +483,13 @@ export function Properties() {
         </div>
       </div>
     </section>
+  )
+}
+
+export function Properties() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PropertiesComponent />
+    </Suspense>
   )
 }
