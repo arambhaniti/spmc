@@ -5,57 +5,8 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import Image from 'next/image'
 import { ArrowRight, Search, Filter } from "lucide-react"
-
-const INSIGHTS = [
-  {
-    date: "March 12, 2026",
-    title: "The Resurgence of Brutalist Architecture in Brooklyn",
-    category: "Market Trends",
-    excerpt:
-      "Why modern buyers are looking back to raw materials and bold geometric forms. We explore the structural honesty and cultural impact of the new brutalist wave.",
-    image: "/modern-architecture-brutalist.jpg?key=i1&height=600&width=800&query=brutalist-modern-architecture",
-  },
-  {
-    date: "February 28, 2026",
-    title: "How Interest Rates are Shaping the 2026 Luxury Market",
-    category: "Finance",
-    excerpt:
-      "Navigating the shifting tides of high-end real estate financing in the current economic climate. A deep dive into strategic lending and asset preservation.",
-    image: "/luxury-office-finance.jpg?key=i2&height=600&width=800&query=luxury-office-interior",
-  },
-  {
-    date: "January 15, 2026",
-    title: "The 10 Most Anticipated Penthouses Opening This Year",
-    category: "Exclusive",
-    excerpt:
-      "A preview of the architectural giants rising above the Manhattan skyline, redefining vertical living with unprecedented amenities and design.",
-    image: "/penthouse-skyline-view.jpg?key=i3&height=600&width=800&query=penthouse-view-nyc",
-  },
-  {
-    date: "December 10, 2025",
-    title: "Sustainable Luxury: The Future of High-End Development",
-    category: "Sustainability",
-    excerpt:
-      "How world-class architects are integrating passive design and renewable energy into the world's most expensive residences without compromising on aesthetic.",
-    image: "/green-architecture.jpg?key=i4&height=600&width=800&query=sustainable-modern-mansion",
-  },
-  {
-    date: "November 22, 2025",
-    title: "The Psychology of Space: Why Minimalism is Winning",
-    category: "Design",
-    excerpt:
-      "Exploring the emotional impact of open-plan living and the intentional use of negative space in contemporary residential architecture.",
-    image: "/minimalist-interior.jpg?key=i5&height=600&width=800&query=minimalist-luxury-interior",
-  },
-  {
-    date: "October 05, 2025",
-    title: "Investing in Mid-Century Modern Landmarks",
-    category: "Investment",
-    excerpt:
-      "A guide to identifying and preserving mid-century masterpieces, from valuation nuances to the challenges of modernizing historic structural systems.",
-    image: "/mid-century-modern.jpg?key=i6&height=600&width=800&query=mid-century-modern-house",
-  },
-]
+import Link from "next/link"
+import { INSIGHTS } from "@/config/insights-data"
 
 export default function InsightsPage() {
   return (
@@ -117,54 +68,55 @@ export default function InsightsPage() {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
             {INSIGHTS.map((post, index) => (
-              <motion.article
-                key={post.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: (index % 3) * 0.1 }}
-                className="group cursor-pointer"
-              >
-                <div className="relative aspect-[4/5] mb-8 overflow-hidden rounded-3xl">
-                  <Image
-                    src={post.image || "/placeholder.svg"}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement
-                      target.style.display = 'none'
-                      const parent = target.parentElement
-                      if (parent && !parent.querySelector('.fallback-content')) {
-                        const fallbackDiv = document.createElement('div')
-                        fallbackDiv.className = 'fallback-content absolute inset-0 bg-linear-to-br from-accent/20 via-primary/10 to-accent/20 flex items-center justify-center'
-                        fallbackDiv.innerHTML = `
-                          <div class="text-center p-8">
-                            <svg class="w-16 h-16 mx-auto mb-4 text-accent/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                            </svg>
-                            <div class="w-24 h-1 bg-accent/30 mx-auto mb-4 rounded-full"></div>
-                            <p class="text-accent/80 font-medium text-sm uppercase tracking-wider">${post.title}</p>
-                            <p class="text-accent/60 text-xs mt-2">Image Coming Soon</p>
-                          </div>
-                        `
-                        parent.appendChild(fallbackDiv)
-                      }
-                    }}
-                  />
-                  <div className="absolute top-6 left-6 px-4 py-1.5 bg-background/80 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/20">
-                    {post.category}
+              <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
+                <motion.article
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: (index % 3) * 0.1 }}
+                  className="cursor-pointer"
+                >
+                  <div className="relative aspect-[4/5] mb-8 overflow-hidden rounded-3xl">
+                    <Image
+                      src={post.image || "/placeholder.svg"}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.style.display = 'none'
+                        const parent = target.parentElement
+                        if (parent && !parent.querySelector('.fallback-content')) {
+                          const fallbackDiv = document.createElement('div')
+                          fallbackDiv.className = 'fallback-content absolute inset-0 bg-linear-to-br from-accent/20 via-primary/10 to-accent/20 flex items-center justify-center'
+                          fallbackDiv.innerHTML = `
+                            <div class="text-center p-8">
+                              <svg class="w-16 h-16 mx-auto mb-4 text-accent/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                              </svg>
+                              <div class="w-24 h-1 bg-accent/30 mx-auto mb-4 rounded-full"></div>
+                              <p class="text-accent/80 font-medium text-sm uppercase tracking-wider">${post.title}</p>
+                              <p class="text-accent/60 text-xs mt-2">Image Coming Soon</p>
+                            </div>
+                          `
+                          parent.appendChild(fallbackDiv)
+                        }
+                      }}
+                    />
+                    <div className="absolute top-6 left-6 px-4 py-1.5 bg-background/80 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/20">
+                      {post.category}
+                    </div>
                   </div>
-                </div>
-                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-4">{post.date}</div>
-                <h2 className="text-3xl font-serif font-bold mb-4 group-hover:text-accent transition-colors leading-[1.1] tracking-tight">
-                  {post.title}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed mb-8 line-clamp-3">{post.excerpt}</p>
-                <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest border-b border-transparent group-hover:border-accent w-fit pb-1 transition-all">
-                  Full Analysis <ArrowRight className="w-3 h-3 group-hover:translate-x-2 transition-transform" />
-                </div>
-              </motion.article>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-4">{post.date}</div>
+                  <h2 className="text-3xl font-serif font-bold mb-4 group-hover:text-accent transition-colors leading-[1.1] tracking-tight">
+                    {post.title}
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed mb-8 line-clamp-3">{post.excerpt}</p>
+                  <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest border-b border-transparent group-hover:border-accent w-fit pb-1 transition-all">
+                    Full Analysis <ArrowRight className="w-3 h-3 group-hover:translate-x-2 transition-transform" />
+                  </div>
+                </motion.article>
+              </Link>
             ))}
           </div>
 
