@@ -2,6 +2,7 @@
 
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { ContactForm } from "@/components/contact-form"
 import { motion } from "framer-motion"
 import { Mail, Phone, MapPin, ArrowRight, Clock, Globe, Calendar, MessageSquare } from "lucide-react"
 import Image from 'next/image'
@@ -74,9 +75,13 @@ export default function ContactPage() {
                   </div>
                   <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground mb-4">Email</h3>
                   <p className="text-lg font-serif italic mb-1">General Inquiries</p>
-                  <p className="font-bold">hello@therealest.com</p>
+                  <p className="font-bold">info@spmc.com</p>
                   <p className="text-lg font-serif italic mt-4 mb-1">Direct Advisor</p>
-                  <p className="font-bold">sofia@therealest.com</p>
+                  <p className="font-bold">dheeraj@spmc.com</p>
+                  <p className="text-lg font-serif italic mt-4 mb-1">Human Resources</p>
+                  <p className="font-bold">hr@spmc.com</p>
+                  <p className="text-lg font-serif italic mt-4 mb-1">Accounts</p>
+                  <p className="font-bold">accounts@spmc.com</p>
                 </motion.div>
 
                 <motion.div
@@ -89,10 +94,8 @@ export default function ContactPage() {
                     <Phone className="w-6 h-6" />
                   </div>
                   <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground mb-4">Phone</h3>
-                  <p className="text-lg font-serif italic mb-1">Global Studio</p>
-                  <p className="font-bold">212.555.0123</p>
-                  <p className="text-lg font-serif italic mt-4 mb-1">Concierge Line</p>
-                  <p className="font-bold">310.555.0199</p>
+                  <p className="text-lg font-serif italic mb-1">Main Office</p>
+                  <p className="font-bold">+971 58 502 8100</p>
                 </motion.div>
               </div>
 
@@ -124,90 +127,14 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Inquiry Form Redesign */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-white border border-accent/5 p-12 rounded-[3rem] shadow-2xl relative"
-            >
-              <div className="mb-10 text-center">
-                <h2 className="text-3xl font-serif font-bold mb-4">Inquiry Studio</h2>
-                <p className="text-muted-foreground text-sm">
-                  Please provide the details of your architectural vision.
-                </p>
-              </div>
-
-              <form className="space-y-8">
-                <div className="grid sm:grid-cols-2 gap-8">
-                  <div className="space-y-3">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full bg-muted/30 border-b-2 border-transparent focus:border-accent p-4 rounded-xl outline-none transition-all placeholder:text-muted-foreground/30"
-                      placeholder="Alexander"
-                    />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full bg-muted/30 border-b-2 border-transparent focus:border-accent p-4 rounded-xl outline-none transition-all placeholder:text-muted-foreground/30"
-                      placeholder="Thorne"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    className="w-full bg-muted/30 border-b-2 border-transparent focus:border-accent p-4 rounded-xl outline-none transition-all placeholder:text-muted-foreground/30"
-                    placeholder="alex@thorne-group.com"
-                  />
-                </div>
-
-                <div className="space-y-3">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                    Subject of Interest
-                  </label>
-                  <select className="w-full bg-muted/30 border-b-2 border-transparent focus:border-accent p-4 rounded-xl outline-none transition-all cursor-pointer">
-                    <option>Property Acquisition</option>
-                    <option>Strategic Divestment</option>
-                    <option>Architectural Scouting</option>
-                    <option>Investment Portfolio Advisory</option>
-                    <option>Relocation Concierge</option>
-                  </select>
-                </div>
-
-                <div className="space-y-3">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
-                    Message / Vision
-                  </label>
-                  <textarea
-                    rows={5}
-                    className="w-full bg-muted/30 border-b-2 border-transparent focus:border-accent p-4 rounded-xl outline-none transition-all resize-none placeholder:text-muted-foreground/30"
-                    placeholder="Tell us about the space you're looking for..."
-                  ></textarea>
-                </div>
-
-                <button className="w-full py-6 bg-primary text-white rounded-full font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-accent transition-all flex items-center justify-center gap-4 group shadow-xl shadow-primary/20">
-                  Send Inquiry <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-                </button>
-              </form>
-            </motion.div>
+            {/* Contact Form */}
+            <ContactForm />
           </div>
         </div>
       </section>
 
       {/* Office Locations Grid */}
-      <section className="py-32 bg-secondary/10">
+      {/* <section className="py-32 bg-secondary/10">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mb-24">
             <span className="text-accent font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">Our Studios</span>
@@ -252,7 +179,7 @@ export default function ContactPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Communication Policy Section */}
       <section className="py-32 bg-white">

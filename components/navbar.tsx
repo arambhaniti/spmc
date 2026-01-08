@@ -40,7 +40,6 @@ export function Navbar() {
     { label: "Portfolio", href: "/portfolio" },
     { label: "Insights", href: "/insights" },
     { label: "Services", href: "/services" },
-    { label: "Philosophy", href: "/philosophy" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ]

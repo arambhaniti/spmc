@@ -358,7 +358,7 @@ function PropertiesComponent() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {currentProperties.map((prop, idx) => (
-            <Link href={prop.url || `/properties/${prop.id}`} key={prop.id}>
+            <Link href={prop.url || `/properties/${prop.id}`} key={prop.id} target="_blank" rel="noopener noreferrer">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
