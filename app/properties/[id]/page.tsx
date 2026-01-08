@@ -1,11 +1,14 @@
 "use client"
 
 import { useParams } from "next/navigation"
+import { useState } from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { PropertyCarousel } from "@/components/property-carousel"
+import { PropertyMap } from "@/components/property-map"
+import { PropertyInquiryForm } from "@/components/property-inquiry-form"
 import { motion } from "framer-motion"
-import Image from 'next/image'
-import { MapPin, Bed, Bath, Maximize2, CheckCircle2, ArrowRight, Share2, Heart, Calendar } from "lucide-react"
+import { MapPin, Bed, Bath, Maximize2, CheckCircle2, ArrowRight, Share2, Heart, Calendar, Phone, Home, Star, Badge } from "lucide-react"
 
 const PROPERTY_DATA: Record<string, any> = {
   "dubai-marina-penthouse": {
@@ -652,197 +655,340 @@ const PROPERTY_DATA: Record<string, any> = {
 
 const getProp = (id: string) => PROPERTY_DATA[id] || PROPERTY_DATA["dubai-marina-penthouse"]
 
+const getListingId = (prop: any, fallbackId: string) => {
+  const listingSpec = prop.specs?.find((spec: any) => spec.label === "Listing ID")
+  return listingSpec?.value || fallbackId
+}
+
 export default function PropertyDetail() {
   const params = useParams()
   const id = params.id as string
   const prop = getProp(id)
+  const propertyId = getListingId(prop, id)
+  const [isLiked, setIsLiked] = useState(false)
+  const [isShared, setIsShared] = useState(false)
 
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
 
       {/* Hero Gallery */}
-      <section className="pt-24 pb-12">
+      <section className="pt-24 pb-16 bg-gradient-to-b from-accent/5 to-white">
         <div className="container mx-auto px-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col md:flex-row justify-between items-end mb-8 gap-6"
+            transition={{ duration: 0.6 }}
+            className="mb-12"
           >
-            <div className="flex-1">
-              <div className="flex items-center gap-2 text-accent font-bold uppercase tracking-widest text-[10px] mb-4">
-                <MapPin className="w-3 h-3" /> {prop.location}
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
+              <div className="flex-1">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="flex items-center gap-3 text-accent font-bold uppercase tracking-widest text-xs mb-4"
+                >
+                  <MapPin className="w-4 h-4" />
+                  <span>{prop.location}</span>
+                  <Badge className="bg-accent text-white text-xs px-2 py-1">{prop.type}</Badge>
+                </motion.div>
+                <motion.h1 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tighter leading-none mb-4"
+                >
+                  {prop.title}
+                </motion.h1>
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="flex items-center gap-6 text-muted-foreground"
+                >
+                  <div className="flex items-center gap-2">
+                    <Home className="w-4 h-4" />
+                    <span className="text-sm">{prop.neighborhood}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Star className="w-4 h-4 fill-accent text-accent" />
+                    <Star className="w-4 h-4 fill-accent text-accent" />
+                    <Star className="w-4 h-4 fill-accent text-accent" />
+                    <Star className="w-4 h-4 fill-accent text-accent" />
+                    <Star className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm ml-1">(4.8)</span>
+                  </div>
+                </motion.div>
               </div>
-              <h1 className="text-4xl md:text-7xl font-serif font-bold tracking-tighter leading-none">{prop.title}</h1>
-            </div>
-            <div className="flex flex-col items-end gap-4">
-              <div className="flex gap-2">
-                <button className="p-3 border rounded-full hover:bg-muted transition-colors">
-                  <Share2 className="w-4 h-4" />
-                </button>
-                <button className="p-3 border rounded-full hover:bg-muted transition-colors text-destructive">
-                  <Heart className="w-4 h-4" />
-                </button>
-              </div>
-              <div className="text-right">
-                <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold mb-1">
-                  Asking Price
-                </p>
-                <p className="text-3xl md:text-5xl font-serif font-bold text-accent">{prop.price}</p>
-              </div>
+              
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex flex-col items-end gap-6"
+              >
+                <div className="flex gap-3">
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      setIsShared(!isShared)
+                      navigator.share?.({ title: prop.title, url: window.location.href })
+                    }}
+                    className={`p-3 rounded-full border-2 transition-all ${
+                      isShared ? 'bg-accent text-white border-accent' : 'bg-white border-gray-200 hover:border-accent hover:bg-accent/5'
+                    }`}
+                  >
+                    <Share2 className="w-5 h-5" />
+                  </motion.button>
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setIsLiked(!isLiked)}
+                    className={`p-3 rounded-full border-2 transition-all ${
+                      isLiked ? 'bg-destructive text-white border-destructive' : 'bg-white border-gray-200 hover:border-destructive hover:bg-destructive/5'
+                    }`}
+                  >
+                    <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
+                  </motion.button>
+                </div>
+                <div className="text-right bg-white p-6 rounded-3xl shadow-lg border border-gray-100">
+                  <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold mb-2">
+                    Asking Price
+                  </p>
+                  <p className="text-3xl md:text-4xl font-serif font-bold text-accent">{prop.price}</p>
+                  <div className="mt-3 flex gap-2 justify-end">
+                    <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium">
+                      {prop.price.includes('/year') ? 'For Lease' : 'For Sale'}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-12 gap-4 h-[400px] md:h-[600px]">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="col-span-12 md:col-span-8 relative rounded-3xl overflow-hidden"
-            >
-              <Image
-                src={prop.images[0] || "/placeholder.svg"}
-                alt={prop.title}
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-            <div className="hidden md:flex flex-col col-span-4 gap-4">
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="relative flex-1 rounded-3xl overflow-hidden"
-              >
-                <Image
-                  src={prop.images[1] || "/placeholder.svg"}
-                  alt="Interior"
-                  fill
-                  className="object-cover"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-                className="relative flex-1 rounded-3xl overflow-hidden"
-              >
-                <Image
-                  src={prop.images[2] || "/placeholder.svg"}
-                  alt="Interior"
-                  fill
-                  className="object-cover"
-                />
-              </motion.div>
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8"
+          >
+            <PropertyCarousel images={prop.images} title={prop.title} />
+          </motion.div>
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <div className="border-y bg-secondary/10 sticky top-[88px] z-40 backdrop-blur-md">
-        <div className="container mx-auto px-6 py-6 flex flex-wrap justify-between items-center gap-8">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
-              <Bed className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Bedrooms</p>
-              <p className="font-bold">{prop.beds}</p>
-            </div>
+      {/* Enhanced Stats Bar */}
+      <div className="sticky top-[88px] z-40 bg-white/95 backdrop-blur-lg border-y border-gray-200 shadow-sm">
+        <div className="container mx-auto px-6 py-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 items-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="flex items-center gap-4 p-4 bg-accent/5 rounded-2xl hover:bg-accent/10 transition-colors"
+            >
+              <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center">
+                <Bed className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Bedrooms</p>
+                <p className="text-xl font-bold text-accent">{prop.beds}</p>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center gap-4 p-4 bg-accent/5 rounded-2xl hover:bg-accent/10 transition-colors"
+            >
+              <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center">
+                <Bath className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Bathrooms</p>
+                <p className="text-xl font-bold text-accent">{prop.baths}</p>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex items-center gap-4 p-4 bg-accent/5 rounded-2xl hover:bg-accent/10 transition-colors"
+            >
+              <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center">
+                <Maximize2 className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Square Ft</p>
+                <p className="text-xl font-bold text-accent">{prop.sqft.toLocaleString()}</p>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="flex items-center gap-4 p-4 bg-accent/5 rounded-2xl hover:bg-accent/10 transition-colors"
+            >
+              <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center">
+                <Calendar className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Year Built</p>
+                <p className="text-xl font-bold text-accent">{prop.yearBuilt}</p>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="hidden lg:block"
+            >
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full px-8 py-4 bg-gradient-to-r from-accent to-accent/80 text-white rounded-2xl text-sm font-bold uppercase tracking-widest hover:shadow-lg transition-all flex items-center justify-center gap-3"
+              >
+                <Phone className="w-5 h-5" />
+                Request Viewing
+              </motion.button>
+            </motion.div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
-              <Bath className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Bathrooms</p>
-              <p className="font-bold">{prop.baths}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
-              <Maximize2 className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Square Ft</p>
-              <p className="font-bold">{prop.sqft.toLocaleString()}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
-              <Calendar className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Year Built</p>
-              <p className="font-bold">{prop.yearBuilt}</p>
-            </div>
-          </div>
-          <button className="px-8 py-3 bg-primary text-white rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform">
-            Request Viewing
-          </button>
         </div>
       </div>
 
-      {/* Main Content */}
-      <section className="py-20">
-        <div className="container mx-auto px-6 grid md:grid-cols-3 gap-20">
-          <div className="md:col-span-2">
-            <h2 className="text-3xl font-serif font-bold mb-8">Property Description</h2>
-            <p className="text-xl leading-relaxed text-muted-foreground mb-12">{prop.description}</p>
+      {/* Enhanced Main Content */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6 grid lg:grid-cols-3 gap-12">
+          <div className="lg:col-span-2 space-y-16">
+            {/* Property Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1 h-8 bg-accent rounded-full"></div>
+                <h2 className="text-3xl font-serif font-bold">Property Description</h2>
+              </div>
+              <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                <p className="text-lg leading-relaxed text-gray-700">{prop.description}</p>
+              </div>
+            </motion.div>
 
-            <h2 className="text-3xl font-serif font-bold mb-8">Extended Information</h2>
-            <p className="text-xl leading-relaxed text-muted-foreground mb-12">{prop.extendedInfo}</p>
+            {/* Extended Information */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1 h-8 bg-accent rounded-full"></div>
+                <h2 className="text-3xl font-serif font-bold">Extended Information</h2>
+              </div>
+              <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                <p className="text-lg leading-relaxed text-gray-700">{prop.extendedInfo}</p>
+              </div>
+            </motion.div>
 
-            <h2 className="text-3xl font-serif font-bold mb-8">Key Amenities</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {prop.features.map((feature: string, i: number) => (
-                <div key={i} className="flex items-center gap-3 p-4 bg-muted rounded-2xl">
-                  <CheckCircle2 className="w-5 h-5 text-accent" />
-                  <span className="font-medium">{feature}</span>
+            {/* Key Amenities - Compact */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1 h-8 bg-accent rounded-full"></div>
+                <h2 className="text-3xl font-serif font-bold">Key Amenities</h2>
+              </div>
+              <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {prop.features.map((feature: string, i: number) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.05 }}
+                      className="flex items-center gap-2 p-3 bg-accent/5 rounded-xl hover:bg-accent/10 transition-colors group"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
+                      <span className="text-sm font-medium text-gray-800 truncate">{feature}</span>
+                    </motion.div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            </motion.div>
 
-            <h2 className="text-3xl font-serif font-bold mb-8 mt-12">Specifications</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {prop.specs.map((spec: any, i: number) => (
-                <div key={i} className="flex items-center gap-3 p-4 bg-muted rounded-2xl">
-                  <span className="font-medium">{spec.label}</span>
-                  <span className="font-medium">{spec.value}</span>
+            {/* Specifications */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1 h-8 bg-accent rounded-full"></div>
+                <h2 className="text-3xl font-serif font-bold">Specifications</h2>
+              </div>
+              <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {prop.specs.map((spec: any, i: number) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex items-center justify-between p-4 bg-gray-50 rounded-2xl hover:bg-accent/5 transition-colors"
+                    >
+                      <span className="font-medium text-gray-600">{spec.label}</span>
+                      <span className="font-bold text-accent">{spec.value}</span>
+                    </motion.div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            </motion.div>
+
+            {/* Property Location Map */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1 h-8 bg-accent rounded-full"></div>
+                <h2 className="text-3xl font-serif font-bold">Property Location</h2>
+              </div>
+              <PropertyMap 
+                location={prop.location} 
+                title={prop.title}
+                coordinates={prop.coordinates}
+              />
+            </motion.div>
           </div>
 
-          <div className="md:col-span-1">
-            <div className="bg-white border p-8 rounded-3xl shadow-2xl sticky top-44">
-              <h3 className="text-2xl font-serif font-bold mb-6 text-center">Inquire About This Property</h3>
-              <div className="space-y-4 mb-8">
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  className="w-full px-4 py-4 rounded-xl border bg-muted focus:bg-white focus:border-accent outline-none transition-all"
-                />
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="w-full px-4 py-4 rounded-xl border bg-muted focus:bg-white focus:border-accent outline-none transition-all"
-                />
-                <textarea
-                  placeholder="Message"
-                  rows={4}
-                  className="w-full px-4 py-4 rounded-xl border bg-muted focus:bg-white focus:border-accent outline-none transition-all resize-none"
-                ></textarea>
-              </div>
-              <button className="w-full py-4 bg-accent text-white rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-accent/90 transition-all flex items-center justify-center gap-3">
-                Send Inquiry <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+          {/* Enhanced Contact Form Sidebar */}
+          <div className="lg:col-span-1">
+            <PropertyInquiryForm 
+              propertyId={propertyId}
+              propertyTitle={prop.title}
+              propertyLocation={prop.location}
+            />
           </div>
         </div>
       </section>
 
       <Footer />
+
     </main>
   )
 }

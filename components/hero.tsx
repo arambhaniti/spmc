@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion"
 import { COMPANY_NAME, HERO_VIDEO, HERO_IMAGE } from '@/config/constants'
+import { URLS } from '@/config/urls'
 import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -61,9 +63,12 @@ export function Hero() {
                   Expertly navigating the luxury real estate market to find your next architectural masterpiece.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 sm:gap-6">
-                  <button className="px-8 py-4 bg-accent text-white rounded-full font-medium hover:scale-105 transition-transform shadow-lg">
+                  <Link 
+                    href={URLS.PROPERTIES}
+                    className="px-8 py-4 bg-accent text-white rounded-full font-medium hover:scale-105 transition-transform shadow-lg inline-block"
+                  >
                     View Properties
-                  </button>
+                  </Link>
                   <button className="text-sm font-bold uppercase tracking-widest border-b-2 border-accent text-white pb-1 hover:text-accent transition-colors">
                     Contact Us
                   </button>
