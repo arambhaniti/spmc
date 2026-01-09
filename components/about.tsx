@@ -2,11 +2,13 @@
 
 import { motion } from "framer-motion"
 import Image from 'next/image'
+import Link from 'next/link'
 import { COMPANY_NAME } from '@/config/constants'
+import { URLS } from '@/config/urls'
 
 export function About() {
   return (
-    <section id="about" className="py-32 overflow-hidden bg-white">
+    <section id="about" className="py-4 md:py-32 overflow-hidden bg-white">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-24 items-center">
           <div className="relative">
@@ -65,17 +67,20 @@ export function About() {
             <div className="grid grid-cols-2 gap-12 mb-12 border-t pt-10">
               <div>
                 <p className="text-[10px] uppercase tracking-widest font-bold text-accent mb-4">The Studio</p>
-                <p className="text-lg font-serif italic">New York • Los Angeles</p>
+                <p className="text-lg font-serif italic">Dubai • Abu Dhabi</p>
               </div>
               <div>
                 <p className="text-[10px] uppercase tracking-widest font-bold text-accent mb-4">Direct Link</p>
-                <p className="text-lg font-serif tracking-tighter">sofia@therealest.com</p>
+                <p className="text-lg font-serif tracking-tighter">contact@spmc.com</p>
               </div>
             </div>
 
-            <button className="group px-10 py-5 border-2 border-primary rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-primary hover:text-white transition-all flex items-center gap-4">
+            <Link 
+              href={URLS.ABOUT}
+              className="group px-10 py-5 border-2 border-primary rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-primary hover:text-white transition-all flex items-center gap-4 inline-block"
+            >
               Our Full Story <span className="group-hover:translate-x-2 transition-transform">→</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

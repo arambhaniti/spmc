@@ -25,43 +25,68 @@ export default function InsightDetailPage({ params }: InsightDetailPageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-linear-to-b from-background via-background/95 to-muted/70">
       <Navbar />
 
       <section className="pt-32 pb-24">
         <div className="container mx-auto px-6 max-w-6xl">
-          <Link
-            href="/insights"
-            className="inline-flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-8 hover:text-accent transition-colors"
-          >
-            <ArrowLeft className="w-3 h-3 mr-2" /> Back to insights
-          </Link>
+          <div className="flex items-center justify-between gap-4 mb-10">
+            <Link
+              href="/insights"
+              className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/70 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground hover:border-accent hover:text-accent hover:bg-background transition-colors"
+            >
+              <ArrowLeft className="w-3 h-3" />
+              <span>Back to insights</span>
+            </Link>
+
+            <div className="hidden md:flex items-center gap-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/80">
+              <span className="inline-flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                {post.category}
+              </span>
+              <span className="w-6 h-px bg-border/60" />
+              <span>{post.location}</span>
+              <span className="w-6 h-px bg-border/60" />
+              <span>{post.readTimeMinutes} min read</span>
+            </div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-12 lg:gap-16 items-start"
+            className="grid lg:grid-cols-[minmax(0,2.1fr)_minmax(0,1fr)] gap-12 lg:gap-16 items-start"
           >
             <div>
-              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-4 flex flex-wrap items-center gap-3">
-                <span>{post.category}</span>
-                <span className="w-6 h-px bg-accent/40" />
-                <span className="text-muted-foreground/80">{post.date}</span>
-                <span className="w-6 h-px bg-accent/20" />
-                <span className="text-muted-foreground/70">{post.location}</span>
-                <span className="w-6 h-px bg-accent/20" />
-                <span className="text-muted-foreground/70">Insight • {post.readTimeMinutes} min read</span>
+              <div className="mb-5 flex flex-wrap items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground/80">
+                <span className="text-accent">{post.category}</span>
+                <span className="w-6 h-px bg-accent/30" />
+                <span>{post.date}</span>
               </div>
-              <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight mb-6 leading-[1.05]">
+
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold tracking-tight leading-[1.02] mb-6">
                 {post.title}
               </h1>
-              <p className="text-muted-foreground text-lg leading-relaxed mb-10 max-w-2xl">
+
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mb-8">
                 {post.excerpt}
               </p>
+
+              {post.tags?.length ? (
+                <div className="flex flex-wrap gap-2 md:gap-3">
+                  {post.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1.5 rounded-full border border-border/70 bg-background/70 text-[11px] font-medium tracking-[0.08em] text-muted-foreground hover:border-accent/70 hover:text-accent transition-colors"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
             </div>
 
-            <div className="lg:justify-self-end w-full max-w-sm lg:max-w-xs space-y-4">
-              <div className="rounded-3xl border border-border/60 bg-background/80 px-6 py-5 flex items-center gap-4">
+            <aside className="lg:justify-self-end w-full max-w-sm lg:max-w-xs space-y-6">
+              <div className="rounded-3xl border border-border/70 bg-background/80 px-6 py-5 flex items-center gap-4 shadow-sm/50">
                 <div className="w-12 h-12 rounded-full bg-muted overflow-hidden flex items-center justify-center text-[11px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
                   {post.authorImage ? (
                     <Image src={post.authorImage} alt={post.authorName} width={48} height={48} className="object-cover w-full h-full" />
@@ -75,77 +100,96 @@ export default function InsightDetailPage({ params }: InsightDetailPageProps) {
                 </div>
               </div>
 
-              {post.tags?.length ? (
-                <div className="rounded-3xl border border-border/60 bg-muted/40 px-6 py-5 text-xs uppercase tracking-[0.18em] font-bold text-muted-foreground">
-                  <p className="mb-3 text-[11px]">Topics</p>
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 rounded-full bg-background text-foreground border border-border/60 normal-case text-[11px] tracking-[0.08em]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+              <div className="grid grid-cols-2 gap-3 text-[11px] uppercase tracking-[0.16em] text-muted-foreground/80">
+                <div className="rounded-2xl border border-border/70 bg-muted/40 px-4 py-3">
+                  <p className="mb-1 text-[10px]">Location</p>
+                  <p className="text-[11px] font-semibold normal-case tracking-normal text-foreground/90">
+                    {post.location}
+                  </p>
                 </div>
-              ) : null}
+                <div className="rounded-2xl border border-border/70 bg-muted/40 px-4 py-3">
+                  <p className="mb-1 text-[10px]">Reading time</p>
+                  <p className="text-[11px] font-semibold normal-case tracking-normal text-foreground/90">
+                    {post.readTimeMinutes} minutes
+                  </p>
+                </div>
+              </div>
 
               {post.keyStats?.length ? (
-                <div className="rounded-3xl border border-border/60 bg-background/80 px-6 py-6 space-y-4 text-sm">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Key figures</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="rounded-3xl border border-border/70 bg-background/90 px-6 py-5 space-y-4 text-sm">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                    Key figures
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {post.keyStats.map((stat) => (
-                      <div key={stat.label} className="border-l border-accent/40 pl-3">
-                        <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground mb-1">{stat.label}</p>
-                        <p className="text-sm text-foreground font-medium leading-snug">{stat.value}</p>
+                      <div
+                        key={stat.label}
+                        className="rounded-2xl border border-border/70 bg-muted/40 px-4 py-3"
+                      >
+                        <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mb-1">
+                          {stat.label}
+                        </p>
+                        <p className="text-sm text-foreground font-medium leading-snug">
+                          {stat.value}
+                        </p>
                       </div>
                     ))}
                   </div>
                 </div>
               ) : null}
-            </div>
+            </aside>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.12 }}
-            className="relative aspect-video rounded-[2.5rem] overflow-hidden mt-12 mb-16"
+            className="relative mt-12 mb-20 overflow-hidden rounded-[2.5rem] border border-border/70 bg-muted/40"
           >
-            <Image
-              src={post.image || "/placeholder.svg"}
-              alt={post.title}
-              fill
-              className="object-cover"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement
-                target.style.display = 'none'
-                const parent = target.parentElement
-                if (parent && !parent.querySelector('.fallback-content')) {
-                  const fallbackDiv = document.createElement('div')
-                  fallbackDiv.className = 'fallback-content absolute inset-0 bg-linear-to-br from-accent/20 via-primary/10 to-accent/20 flex items-center justify-center'
-                  fallbackDiv.innerHTML = `
-                    <div class="text-center p-8">
-                      <svg class="w-16 h-16 mx-auto mb-4 text-accent/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                      </svg>
-                      <div class="w-24 h-1 bg-accent/30 mx-auto mb-4 rounded-full"></div>
-                      <p class="text-accent/80 font-medium text-sm uppercase tracking-wider">${post.title}</p>
-                      <p class="text-accent/60 text-xs mt-2">Image Coming Soon</p>
-                    </div>
-                  `
-                  parent.appendChild(fallbackDiv)
-                }
-              }}
-            />
+            <div className="relative aspect-video">
+              <Image
+                src={post.image || "/placeholder.svg"}
+                alt={post.title}
+                fill
+                className="object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement
+                  target.style.display = 'none'
+                  const parent = target.parentElement
+                  if (parent && !parent.querySelector('.fallback-content')) {
+                    const fallbackDiv = document.createElement('div')
+                    fallbackDiv.className = 'fallback-content absolute inset-0 bg-linear-to-br from-accent/20 via-primary/10 to-accent/20 flex items-center justify-center'
+                    fallbackDiv.innerHTML = `
+                      <div class="text-center p-8">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-accent/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                        <div class="w-24 h-1 bg-accent/30 mx-auto mb-4 rounded-full"></div>
+                        <p class="text-accent/80 font-medium text-sm uppercase tracking-wider">${post.title}</p>
+                        <p class="text-accent/60 text-xs mt-2">Image Coming Soon</p>
+                      </div>
+                    `
+                    parent.appendChild(fallbackDiv)
+                  }
+                }}
+              />
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4 border-t border-border/60 bg-background/80 backdrop-blur-sm">
+              <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                {post.location} • {post.date}
+              </p>
+              <p className="text-[11px] text-muted-foreground/80">
+                A visual from the world this insight speaks to.
+              </p>
+            </div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18 }}
-            className="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-12 lg:gap-16 items-start"
+            className="grid lg:grid-cols-[minmax(0,2.1fr)_minmax(0,1fr)] gap-12 lg:gap-16 items-start"
           >
             <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:tracking-tight prose-p:text-muted-foreground prose-p:leading-relaxed">
               {post.content.length > 0 && (
@@ -167,7 +211,7 @@ export default function InsightDetailPage({ params }: InsightDetailPageProps) {
                 </p>
               </div>
 
-              <div className="rounded-3xl border border-border/70 bg-background/80 p-6 text-sm">
+              <div className="rounded-3xl border border-border/70 bg-background/90 p-6 text-sm">
                 <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground mb-3">Signals to watch</p>
                 <ul className="space-y-2 list-disc list-inside text-muted-foreground">
                   <li>How quickly architecturally significant listings are absorbed at the top of the market.</li>
@@ -184,7 +228,9 @@ export default function InsightDetailPage({ params }: InsightDetailPageProps) {
             transition={{ delay: 0.24 }}
             className="mt-20 pt-10 border-t border-border/60"
           >
-            <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground mb-6">Continue exploring</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground mb-6">
+              Continue exploring
+            </p>
             <div className="grid md:grid-cols-2 gap-8">
               {INSIGHTS.filter((p) => p.slug !== post.slug)
                 .slice(0, 2)
@@ -192,19 +238,36 @@ export default function InsightDetailPage({ params }: InsightDetailPageProps) {
                   <Link
                     key={related.slug}
                     href={`/insights/${related.slug}`}
-                    className="group flex flex-col gap-3 border border-border/60 rounded-3xl p-6 hover:border-accent/70 hover:bg-muted/40 transition-colors"
+                    className="group flex flex-col gap-4 overflow-hidden rounded-3xl border border-border/70 bg-background/80 hover:bg-muted/40 hover:border-accent/70 transition-colors"
                   >
-                    <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
-                      {related.category} • {related.date}
+                    <div className="relative h-40 overflow-hidden">
+                      <Image
+                        src={related.image || "/placeholder.svg"}
+                        alt={related.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-x-4 bottom-4 flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.2em] text-white/90">
+                        <span className="px-3 py-1 rounded-full bg-black/50 backdrop-blur">
+                          {related.category}
+                        </span>
+                        <span className="text-xs text-white/80">{related.readTimeMinutes} min</span>
+                      </div>
                     </div>
-                    <h3 className="text-lg font-serif font-semibold group-hover:text-accent transition-colors">
-                      {related.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground line-clamp-3">{related.excerpt}</p>
-                    <span className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground flex items-center gap-2">
-                      Read analysis
-                      <span className="w-5 h-px bg-foreground/70 group-hover:w-8 transition-all" />
-                    </span>
+
+                    <div className="p-6 flex flex-col gap-3">
+                      <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                        {related.date}
+                      </div>
+                      <h3 className="text-lg font-serif font-semibold group-hover:text-accent transition-colors">
+                        {related.title}
+                      </h3>
+                      <p className="text-xs text-muted-foreground line-clamp-3">{related.excerpt}</p>
+                      <span className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground flex items-center gap-2">
+                        Read analysis
+                        <span className="w-5 h-px bg-foreground/70 group-hover:w-8 transition-all" />
+                      </span>
+                    </div>
                   </Link>
                 ))}
             </div>
@@ -217,7 +280,9 @@ export default function InsightDetailPage({ params }: InsightDetailPageProps) {
               transition={{ delay: 0.28 }}
               className="mt-16 pt-8 border-t border-border/40"
             >
-              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground mb-4">Sources & references</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-muted-foreground mb-4">
+                Sources & references
+              </p>
               <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
                 {post.sources.map((source, index) => (
                   <li key={index}>{source}</li>

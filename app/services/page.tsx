@@ -144,7 +144,7 @@ export default function ServicesPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-background/90 max-w-2xl mx-auto leading-relaxed"
+            className="text-xl text-background/90 max-w-2xl mx-auto leading-relaxed text-justify"
           >
             From first-time buyers to seasoned investors, I provide tailored real estate services that transform your
             goals into reality.
@@ -168,7 +168,7 @@ export default function ServicesPage() {
             <h2 className="text-5xl md:text-7xl font-serif font-bold mb-6 tracking-tighter leading-[0.9]">
               How I <span className="text-accent italic">Serve You</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed text-justify">
               Every client deserves a personalized approach. Here's how I ensure your real estate experience exceeds
               expectations at every turn.
             </p>
@@ -191,7 +191,7 @@ export default function ServicesPage() {
                     </div>
                     <h3 className="text-4xl font-serif font-bold tracking-tight">{service.title}</h3>
                   </div>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-10">{service.description}</p>
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-10 text-justify">{service.description}</p>
                   <ul className="space-y-4">
                     {service.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-3">
@@ -223,7 +223,7 @@ export default function ServicesPage() {
             <h2 className="text-4xl font-serif font-bold tracking-tighter leading-tight mb-6">
               Specialized <br /> <span className="italic text-accent">Advisory.</span>
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed text-justify">
               Beyond traditional real estate, we offer consulting services that bridge the gap between architecture,
               finance, and lifestyle design.
             </p>
@@ -249,7 +249,7 @@ export default function ServicesPage() {
             ].map((item, i) => (
               <div key={i} className="border-l-2 border-accent/20 pl-8">
                 <h4 className="text-xl font-bold mb-3">{item.title}</h4>
-                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed text-justify">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -267,7 +267,7 @@ export default function ServicesPage() {
             className="text-center mb-20"
           >
             <h2 className="text-5xl md:text-6xl font-serif font-bold mb-6 tracking-tighter">My Process</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed text-justify">
               A proven methodology refined through years of successful transactions and satisfied clients.
             </p>
           </motion.div>
@@ -291,7 +291,7 @@ export default function ServicesPage() {
                   {item.step}
                 </div>
                 <h4 className="text-2xl font-bold mb-3">{item.title}</h4>
-                <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                <p className="text-muted-foreground leading-relaxed text-justify">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -308,7 +308,7 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-5xl md:text-7xl font-serif font-bold mb-6 tracking-tighter">Ready to Get Started?</h2>
-            <p className="text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-xl text-primary-foreground max-w-2xl mx-auto mb-10 leading-relaxed text-justify">
               Let's discuss how I can help you achieve your real estate goals with personalized service and proven
               expertise.
             </p>
