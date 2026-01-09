@@ -6,6 +6,7 @@ import { ContactForm } from "@/components/contact-form"
 import { motion } from "framer-motion"
 import { Mail, Phone, MapPin, ArrowRight, Clock, Globe, Calendar, MessageSquare } from "lucide-react"
 import Image from 'next/image'
+import { CONTACT } from '@/config/constants'
 
 const OFFICES = [
   {
@@ -16,9 +17,9 @@ const OFFICES = [
     image: "/nyc-office.jpg?key=c1&height=400&width=600&query=luxury-office-manhattan",
   },
   {
-    city: "Los Angeles",
-    address: "8800 Wilshire Blvd",
-    state: "Beverly Hills, CA 90211",
+    city: "Dubai",
+    address: "Downtown Dubai, Dubai Marina",
+    state: "United Arab Emirates",
     phone: "310.555.0199",
     image: "/la-office.jpg?key=c2&height=400&width=600&query=luxury-office-beverly-hills",
   },
@@ -75,13 +76,13 @@ export default function ContactPage() {
                   </div>
                   <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground mb-4">Email</h3>
                   <p className="text-lg font-serif italic mb-1">General Inquiries</p>
-                  <p className="font-bold">info@spmc.com</p>
+                  <p className="font-bold">{CONTACT.EMAIL_GENERAL}</p>
                   <p className="text-lg font-serif italic mt-4 mb-1">Direct Advisor</p>
-                  <p className="font-bold">dheeraj@spmc.com</p>
+                  <p className="font-bold">{CONTACT.EMAIL_DIRECT}</p>
                   <p className="text-lg font-serif italic mt-4 mb-1">Human Resources</p>
-                  <p className="font-bold">hr@spmc.com</p>
+                  <p className="font-bold">{CONTACT.EMAIL_HR}</p>
                   <p className="text-lg font-serif italic mt-4 mb-1">Accounts</p>
-                  <p className="font-bold">accounts@spmc.com</p>
+                  <p className="font-bold">{CONTACT.EMAIL_ACCOUNTS}</p>
                 </motion.div>
 
                 <motion.div
@@ -95,7 +96,7 @@ export default function ContactPage() {
                   </div>
                   <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground mb-4">Phone</h3>
                   <p className="text-lg font-serif italic mb-1">Main Office</p>
-                  <p className="font-bold">+971 58 502 8100</p>
+                  <p className="font-bold">{CONTACT.PHONE}</p>
                 </motion.div>
               </div>
 

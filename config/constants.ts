@@ -1,6 +1,16 @@
 export const COMPANY_NAME = "Sovereign Prime Management Consultancy"
 export const SHORT_NAME = "SPMC"
 
+// Contact Information
+export const CONTACT = {
+    PHONE: "+971 58 502 8100",
+    EMAIL_GENERAL: "info@spmc.app",
+    EMAIL_DIRECT: "dheeraj@spmc.app",
+    EMAIL_HR: "hr@spmc.app",
+    EMAIL_ACCOUNTS: "accounts@spmc.app",
+    WHATSAPP: "+971585028100"
+} as const
+
 export const HERO_VIDEO = 'https://cdn.jsdelivr.net/gh/arambhaniti/spmc-content@main/videos/hero.mp4'
 export const HERO_IMAGE = 'https://cdn.jsdelivr.net/gh/arambhaniti/spmc-content@main/images/hero/hero1.png'
 

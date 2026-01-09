@@ -9,59 +9,58 @@ import { PORTFOLIO_IMAGES } from '@/config/constants'
 
 const PORTFOLIO_PROJECTS = [
   {
-    title: "The Glass House",
-    location: "Hamptons, NY",
+    title: "Burj Vista Penthouse",
+    location: "Downtown Dubai",
     year: "2025",
     description:
-      "A record-breaking sale of a modern architectural marvel on the waterfront, featuring seamless integration with the surrounding dunes.",
+      "Record-breaking acquisition of a triplex penthouse with panoramic views of the Dubai skyline and Burj Khalifa.",
     extended:
-      "Representing both the vision of the architect and the lifestyle of the buyer, this transaction redefined value in the East End luxury market.",
+      "This transaction set new benchmarks for Downtown Dubai luxury market, featuring private elevator access and rooftop infinity pool.",
     image: PORTFOLIO_IMAGES.THEGLASS_HOUSE,
-    category: "Residential",
-  },
-  {
-    title: "Skyline Penthouse",
-    location: "Tribeca, NY",
-    year: "2024",
-    description:
-      "Represented the buyer in securing one of the most exclusive duplexes in Manhattan, overlooking the Hudson.",
-    extended:
-      "The acquisition required discreet negotiation and structural foresight to ensure the vertical living space met the collector's gallery requirements.",
-    image: PORTFOLIO_IMAGES.SKYLINE_PENTHOUSE,
     category: "Penthouse",
   },
   {
-    title: "Industrial Loft",
-    location: "SoHo, NY",
+    title: "Palm Jumeirah Mansion",
+    location: "Palm Jumeirah",
     year: "2024",
     description:
-      "Transformation of a historic printing house into a contemporary artist's sanctuary, preserving raw structural elements.",
+      "Exclusive beachfront estate spanning 15,000 sq ft with private beach access and panoramic Arabian Gulf views.",
     extended:
-      "Working alongside premier interior designers, we facilitated a sale that honored the building's industrial heritage while embracing modern comfort.",
+      "Represented both buyer and seller in this landmark transaction, coordinating with multiple stakeholders for seamless transfer of this architectural masterpiece.",
+    image: PORTFOLIO_IMAGES.SKYLINE_PENTHOUSE,
+    category: "Waterfront",
+  },{
+    title: "Emirates Hills Villa",
+    location: "Emirates Hills",
+    year: "2024",
+    description:
+      "Mediterranean-inspired villa on championship golf course, featuring state-of-the-art smart home integration.",
+    extended:
+      "Facilitated complex negotiation involving international trust structures and succession planning for this multi-generational family estate.",
     image: PORTFOLIO_IMAGES.INDUSTRIAL_LOFT,
-    category: "Restoration",
+    category: "Golf Estate",
   },
   {
-    title: "Mid-Century Manor",
-    location: "Beverly Hills, CA",
+    title: "Dubai Marina Sky Villa",
+    location: "Dubai Marina",
     year: "2023",
     description:
-      "A rare restoration project of a 1958 classic, successfully matched with a buyer committed to preservation.",
+      "Revolutionary sky villa concept spanning three floors with private pool terrace and marina views.",
     extended:
-      "This transaction involved complex historical zoning coordination and a deep appreciation for the original architectural intent.",
+      "This innovative property redefined luxury living in Dubai Marina, attracting international investors seeking unique architectural propositions.",
     image: PORTFOLIO_IMAGES.MIDCENTUARY_MANOR,
-    category: "Historic",
+    category: "Sky Villa",
   },
   {
-    title: "The Concrete Cube",
-    location: "Silver Lake, LA",
+    title: "DIFC Loft Residence",
+    location: "DIFC",
     year: "2023",
     description:
-      "A triumph of minimalist concrete construction, this sale set a new benchmark for Silver Lake's architectural market.",
+      "Industrial-chic residence in Dubai's financial district, blending raw architectural elements with luxury finishes.",
     extended:
-      "The marketing strategy centered on the interplay of raw light and brutalist geometry, attracting international design enthusiasts.",
+      "Successfully marketed to high-net-worth professionals seeking proximity to financial hub while maintaining artistic living environment.",
     image: PORTFOLIO_IMAGES.CONCRETE_CUBE,
-    category: "Modernist",
+    category: "Urban Loft",
   },
 ]
 
@@ -97,9 +96,9 @@ export default function PortfolioPage() {
               The <br />
               <span className="italic text-accent">Portfolio.</span>
             </h1>
-            <p className="text-2xl text-white/90 leading-relaxed max-w-2xl">
-              A selection of our most significant transactions and architectural partnerships across the tri-state area
-              and California.
+            <p className="text-2xl text-white/90 leading-relaxed max-w-2xl text-justify">
+              A selection of our most significant transactions and architectural partnerships across Dubai's 
+              premier luxury developments.
             </p>
           </motion.div>
         </div>
@@ -148,7 +147,7 @@ export default function PortfolioPage() {
                     {project.title}
                   </h2>
                   <div
-                    className={`space-y-6 mb-10 text-lg text-muted-foreground leading-relaxed ${index % 2 === 1 ? "ml-auto" : ""}`}
+                    className={`space-y-6 mb-10 text-lg text-muted-foreground leading-relaxed text-justify ${index % 2 === 1 ? "ml-auto" : ""}`}
                   >
                     <p>{project.description}</p>
                     <p className="text-sm italic">{project.extended}</p>

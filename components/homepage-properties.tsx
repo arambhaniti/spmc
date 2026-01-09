@@ -104,12 +104,12 @@ export function HomepageProperties() {
   return (
     <section id="properties" className="py-24 bg-secondary/30">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col mb-4 gap-4">
           <div>
             <span className="text-accent font-bold uppercase tracking-widest text-xs mb-4 block">Featured Properties</span>
             <h2 className="text-5xl md:text-6xl font-serif font-bold tracking-tighter">Discover Dubai's Finest</h2>
           </div>
-          <p className="text-muted-foreground max-w-sm">
+          <p className="text-muted-foreground ">
             Handpicked selection of premium properties representing the pinnacle of Dubai real estate.
           </p>
         </div>

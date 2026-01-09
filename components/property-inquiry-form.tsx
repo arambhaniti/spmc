@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { User, Mail, Phone, ArrowRight, Loader2, CheckCircle } from "lucide-react"
+import { CONTACT } from '@/config/constants'
 
 interface PropertyInquiryFormProps {
   propertyId: string
@@ -289,11 +290,11 @@ export function PropertyInquiryForm({ propertyId, propertyTitle, propertyLocatio
         <div className="mt-6 pt-6 border-t border-gray-200">
           <div className="flex items-center justify-center gap-4 text-sm text-gray-600">
             <Phone className="w-4 h-4" />
-            <span>+971 4 XXX XXXX</span>
+            <span>{CONTACT.PHONE}</span>
           </div>
           <div className="flex items-center justify-center gap-4 text-sm text-gray-600 mt-2">
             <Mail className="w-4 h-4" />
-            <span>info@spmc.ae</span>
+            <span>{CONTACT.EMAIL_GENERAL}</span>
           </div>
         </div>
     </motion.div>

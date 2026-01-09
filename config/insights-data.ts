@@ -174,7 +174,7 @@ export const INSIGHTS: InsightPost[] = [
       "A guide to identifying and preserving mid-century masterpieces, from valuation nuances to the challenges of modernizing historic structural systems.",
     image:
       "/mid-century-modern.jpg?key=i6&height=600&width=800&query=mid-century-modern-house",
-    location: "Palm Springs, Los Angeles, São Paulo",
+    location: "Dubai • Abu Dhabi • Doha",
     readTimeMinutes: 9,
     authorName: "Aram Bhaniti",
     authorTitle: "Founding Partner, SPMC Studio",

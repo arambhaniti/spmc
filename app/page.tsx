@@ -69,7 +69,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-7xl font-serif font-bold tracking-tighter mb-8">
               Redefining Luxury Through <span className="italic text-accent">Vision</span>
             </h2>
-            <p className="text-xl text-muted-foreground leading-relaxed">
+            <p className="text-xl text-muted-foreground leading-relaxed text-justify">
               We don't just find houses; we discover the backdrop for your future memories. Every property in our
               portfolio is selected for its unique soul and architectural integrity.
             </p>
@@ -96,7 +96,7 @@ export default function Home() {
       <FAQ />
 
       {/* Testimonials Marquee-like Section */}
-      <section className="py-24 bg-secondary/20 overflow-hidden">
+      {/* <section className="py-24 bg-secondary/20 overflow-hidden">
         <div className="flex whitespace-nowrap gap-12 items-center">
           {[1, 2, 3, 4].map((i) => (
             <div
@@ -113,7 +113,7 @@ export default function Home() {
             </div>
           ))}
           {/* Duplicate for marquee effect */}
-          {[1, 2, 3, 4].map((i) => (
+          {/* {[1, 2, 3, 4].map((i) => (
             <div
               key={`dup-${i}`}
               className="flex-shrink-0 flex items-center gap-6 p-8 bg-card rounded-3xl border border-border shadow-xl"
@@ -128,7 +128,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </section>  */}
 
       <section className="py-24 container mx-auto px-6 text-center relative">
         <motion.h2
@@ -139,7 +139,7 @@ export default function Home() {
           CONNECT
         </motion.h2>
         <div className="relative z-10 py-12">
-          <p className="text-2xl md:text-4xl font-serif max-w-2xl mx-auto mb-12">
+          <p className="text-2xl md:text-4xl font-serif max-w-2xl mx-auto mb-12 text-justify">
             Let's find your dream home together. Ready to start the journey?
           </p>
           <Link

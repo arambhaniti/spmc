@@ -13,7 +13,7 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif"
 export const metadata: Metadata = {
   title: `${COMPANY_NAME} | Modern Real Estate Agent`,
   description:
-    "Your trusted partner in finding the perfect home. Specialized in high-end properties in New York and Los Angeles.",
+    "Your trusted partner in finding the perfect home. Specialized in high-end properties in Dubai and Abu Dhabi.",
   generator: "v0.app",
 }
 

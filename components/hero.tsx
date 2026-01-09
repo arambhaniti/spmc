@@ -59,7 +59,7 @@ export function Hero() {
                     </span>
                   ))}
                 </h1>
-                <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto md:mx-0 leading-relaxed mb-10">
+                <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto md:mx-0 leading-relaxed mb-10 text-justify">
                   Expertly navigating the luxury real estate market to find your next architectural masterpiece.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 sm:gap-6">
@@ -69,9 +69,12 @@ export function Hero() {
                   >
                     View Properties
                   </Link>
-                  <button className="text-sm font-bold uppercase tracking-widest border-b-2 border-accent text-white pb-1 hover:text-accent transition-colors">
+                  <Link
+                    href={URLS.CONTACT}
+                    className="text-sm font-bold uppercase tracking-widest border-b-2 border-accent text-white pb-1 hover:text-accent transition-colors"
+                  >
                     Contact Us
-                  </button>
+                  </Link>
                 </div>
               </motion.div>
 

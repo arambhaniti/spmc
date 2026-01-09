@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion"
 import { Building2, Landmark, Map, Palmtree } from "lucide-react"
+import Link from 'next/link'
+import { URLS } from '@/config/urls'
 
 const SPECIALTIES = [
   {
@@ -46,9 +48,12 @@ export function Expertise() {
               With over 15 years in the luxury market, we have developed deep specializations that allow us to provide
               unmatched insight into specific architectural niches and neighborhoods.
             </p>
-            <button className="px-10 py-5 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-transform shadow-xl">
+            <Link 
+              href={URLS.SERVICES}
+              className="px-10 py-5 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-transform shadow-xl inline-block"
+            >
               Explore Services
-            </button>
+            </Link>
           </div>
 
           <div className="lg:col-span-7 grid sm:grid-cols-2 gap-8">

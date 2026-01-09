@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer"
 import { PropertyCarousel } from "@/components/property-carousel"
 import { PropertyMap } from "@/components/property-map"
 import { PropertyInquiryForm } from "@/components/property-inquiry-form"
+import { CallModal } from "@/components/call-modal"
 import { motion } from "framer-motion"
 import { MapPin, Bed, Bath, Maximize2, CheckCircle2, ArrowRight, Share2, Heart, Calendar, Phone, Home, Star, Badge } from "lucide-react"
 
@@ -667,6 +668,7 @@ export default function PropertyDetail() {
   const propertyId = getListingId(prop, id)
   const [isLiked, setIsLiked] = useState(false)
   const [isShared, setIsShared] = useState(false)
+  const [isCallModalOpen, setIsCallModalOpen] = useState(false)
 
   return (
     <main className="min-h-screen bg-white">
@@ -779,21 +781,21 @@ export default function PropertyDetail() {
       </section>
 
       {/* Enhanced Stats Bar */}
-      <div className="sticky top-[88px] z-40 bg-white/95 backdrop-blur-lg border-y border-gray-200 shadow-sm">
-        <div className="container mx-auto px-6 py-6">
+      <div className=" top-6 z-40 bg-white backdrop-blur-lg border-y border-gray-200 shadow-lg">
+        <div className="container mx-auto px-6 py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 items-center">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="flex items-center gap-4 p-4 bg-accent/5 rounded-2xl hover:bg-accent/10 transition-colors"
+              className="flex items-center gap-4 p-5 bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl hover:from-accent/15 hover:to-accent/10 transition-all duration-300 border border-accent/20 shadow-md hover:shadow-lg"
             >
-              <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center">
-                <Bed className="w-6 h-6" />
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-accent/80 text-white flex items-center justify-center shadow-lg">
+                <Bed className="w-7 h-7" />
               </div>
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Bedrooms</p>
-                <p className="text-xl font-bold text-accent">{prop.beds}</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-600 mb-1">Bedrooms</p>
+                <p className="text-2xl font-bold text-accent">{prop.beds}</p>
               </div>
             </motion.div>
             
@@ -801,14 +803,14 @@ export default function PropertyDetail() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex items-center gap-4 p-4 bg-accent/5 rounded-2xl hover:bg-accent/10 transition-colors"
+              className="flex items-center gap-4 p-5 bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl hover:from-accent/15 hover:to-accent/10 transition-all duration-300 border border-accent/20 shadow-md hover:shadow-lg"
             >
-              <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center">
-                <Bath className="w-6 h-6" />
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-accent/80 text-white flex items-center justify-center shadow-lg">
+                <Bath className="w-7 h-7" />
               </div>
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Bathrooms</p>
-                <p className="text-xl font-bold text-accent">{prop.baths}</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-600 mb-1">Bathrooms</p>
+                <p className="text-2xl font-bold text-accent">{prop.baths}</p>
               </div>
             </motion.div>
             
@@ -816,14 +818,14 @@ export default function PropertyDetail() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex items-center gap-4 p-4 bg-accent/5 rounded-2xl hover:bg-accent/10 transition-colors"
+              className="flex items-center gap-4 p-5 bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl hover:from-accent/15 hover:to-accent/10 transition-all duration-300 border border-accent/20 shadow-md hover:shadow-lg"
             >
-              <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center">
-                <Maximize2 className="w-6 h-6" />
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-accent/80 text-white flex items-center justify-center shadow-lg">
+                <Maximize2 className="w-7 h-7" />
               </div>
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Square Ft</p>
-                <p className="text-xl font-bold text-accent">{prop.sqft.toLocaleString()}</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-600 mb-1">Square Ft</p>
+                <p className="text-2xl font-bold text-accent">{prop.sqft.toLocaleString()}</p>
               </div>
             </motion.div>
             
@@ -831,14 +833,14 @@ export default function PropertyDetail() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="flex items-center gap-4 p-4 bg-accent/5 rounded-2xl hover:bg-accent/10 transition-colors"
+              className="flex items-center gap-4 p-5 bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl hover:from-accent/15 hover:to-accent/10 transition-all duration-300 border border-accent/20 shadow-md hover:shadow-lg"
             >
-              <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center">
-                <Calendar className="w-6 h-6" />
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-accent/80 text-white flex items-center justify-center shadow-lg">
+                <Calendar className="w-7 h-7" />
               </div>
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Year Built</p>
-                <p className="text-xl font-bold text-accent">{prop.yearBuilt}</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-gray-600 mb-1">Year Built</p>
+                <p className="text-2xl font-bold text-accent">{prop.yearBuilt}</p>
               </div>
             </motion.div>
             
@@ -851,10 +853,11 @@ export default function PropertyDetail() {
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full px-8 py-4 bg-gradient-to-r from-accent to-accent/80 text-white rounded-2xl text-sm font-bold uppercase tracking-widest hover:shadow-lg transition-all flex items-center justify-center gap-3"
+                onClick={() => setIsCallModalOpen(true)}
+                className="w-full px-8 py-5 bg-gradient-to-r from-accent via-accent to-accent/90 text-white rounded-2xl text-sm font-bold uppercase tracking-widest hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 border border-accent/30 shadow-lg"
               >
                 <Phone className="w-5 h-5" />
-                Request Viewing
+                Call Now
               </motion.button>
             </motion.div>
           </div>
@@ -988,6 +991,13 @@ export default function PropertyDetail() {
       </section>
 
       <Footer />
+
+      {/* Call Modal */}
+      <CallModal 
+        isOpen={isCallModalOpen}
+        onClose={() => setIsCallModalOpen(false)}
+        propertyName={prop.title}
+      />
 
     </main>
   )
