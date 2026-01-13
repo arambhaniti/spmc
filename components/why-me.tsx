@@ -28,7 +28,7 @@ const REASONS = [
 
 export function WhyMe() {
   return (
-    <section id="why-me" className="py-24 bg-primary text-primary-foreground overflow-hidden">
+    <section id="why-me" className="py-24 bg-background text-foreground overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <span className="text-accent font-bold uppercase tracking-widest text-xs mb-4 block">Advantages</span>
@@ -43,13 +43,13 @@ export function WhyMe() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="p-8 border border-white/10 rounded-3xl hover:bg-white/5 transition-colors group"
+              className="p-8 border border-border rounded-3xl hover:bg-accent/5 transition-colors group"
             >
               <div className="w-16 h-16 bg-accent/20 rounded-2xl flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
                 {reason.icon}
               </div>
               <h3 className="text-2xl font-serif font-bold mb-4">{reason.title}</h3>
-              <p className="text-primary-foreground/60 text-sm leading-relaxed">{reason.description}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{reason.description}</p>
             </motion.div>
           ))}
         </div>

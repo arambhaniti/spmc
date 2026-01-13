@@ -134,7 +134,7 @@ export default function Home() {
         <motion.h2
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 0.05, scale: 1 }}
-          className="text-[15vw] font-serif font-bold tracking-tighter absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none"
+          className="text-[15vw] font-serif font-bold tracking-tighter absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none text-muted-foreground"
         >
           CONNECT
         </motion.h2>
@@ -144,7 +144,7 @@ export default function Home() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-12 py-6 bg-accent text-white rounded-full text-lg font-bold hover:scale-105 transition-transform shadow-xl shadow-accent/20"
+            className="inline-block px-12 py-6 bg-accent text-accent-foreground rounded-full text-lg font-bold hover:scale-105 transition-transform shadow-xl shadow-accent/20"
           >
             Get In Touch
           </Link>

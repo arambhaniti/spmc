@@ -24,6 +24,8 @@ export default function ServicesPage() {
       title: "Buyer Representation",
       description:
         "I guide you through every step of purchasing your dream property, from initial search to closing. My deep market knowledge and negotiation expertise ensure you secure the best possible deal.",
+      image:
+        "https://cdn.jsdelivr.net/gh/arambhaniti/spmc-content@main/images/services/buyerRepresentation.jpg",
       features: [
         "Personalized property searches tailored to your lifestyle",
         "Expert negotiation to maximize your investment",
@@ -36,6 +38,8 @@ export default function ServicesPage() {
       title: "Seller Services",
       description:
         "Maximize your property's value with strategic marketing, professional staging consultation, and data-driven pricing. I position your home to attract qualified buyers and achieve premium results.",
+      image:
+        "https://cdn.jsdelivr.net/gh/arambhaniti/spmc-content@main/images/services/sellerServices.jpg",
       features: [
         "Professional photography and videography",
         "Global marketing across premium platforms",
@@ -48,6 +52,8 @@ export default function ServicesPage() {
       title: "Investment Consulting",
       description:
         "Leverage my market insights to build a profitable real estate portfolio. I analyze trends, identify emerging opportunities, and provide strategic guidance for long-term wealth creation.",
+      image:
+        "https://cdn.jsdelivr.net/gh/arambhaniti/spmc-content@main/images/services/investimentConsulting.jpg",
       features: [
         "Portfolio diversification strategies",
         "Market trend analysis and forecasting",
@@ -60,6 +66,8 @@ export default function ServicesPage() {
       title: "Relocation Assistance",
       description:
         "Moving to a new city can be overwhelming. I provide comprehensive relocation support, helping you understand neighborhoods, schools, amenities, and local culture to make informed decisions.",
+      image:
+        "https://cdn.jsdelivr.net/gh/arambhaniti/spmc-content@main/images/services/relocation.jpg",
       features: [
         "Neighborhood tours and lifestyle consultations",
         "School district research and recommendations",
@@ -67,23 +75,25 @@ export default function ServicesPage() {
         "Smooth transition planning and coordination",
       ],
     },
-    {
-      icon: Award,
-      title: "Luxury Property Specialist",
-      description:
-        "With expertise in the luxury market, I understand the unique nuances of high-end transactions. Discretion, attention to detail, and white-glove service define every interaction.",
-      features: [
-        "Confidential and discreet transaction management",
-        "Access to exclusive off-market listings",
-        "Concierge-level service and support",
-        "Network of luxury service providers",
-      ],
-    },
+    // {
+    //   icon: Award,
+    //   title: "Luxury Property Specialist",
+    //   description:
+    //     "With expertise in the luxury market, I understand the unique nuances of high-end transactions. Discretion, attention to detail, and white-glove service define every interaction.",
+    //   features: [
+    //     "Confidential and discreet transaction management",
+    //     "Access to exclusive off-market listings",
+    //     "Concierge-level service and support",
+    //     "Network of luxury service providers",
+    //   ],
+    // },
     {
       icon: Shield,
       title: "Legal & Escrow Coordination",
       description:
         "Navigate complex legal frameworks with confidence. I work alongside your legal counsel to ensure compliance, protect your interests, and facilitate seamless escrow management.",
+      image:
+        "https://cdn.jsdelivr.net/gh/arambhaniti/spmc-content@main/images/services/legal.jpg",
       features: [
         "Title verification and due diligence oversight",
         "Contract review and negotiation support",
@@ -96,6 +106,8 @@ export default function ServicesPage() {
       title: "Portfolio Management",
       description:
         "For high-net-worth clients with multiple holdings, I offer comprehensive portfolio management services to optimize returns, manage tenant relations, and oversee property maintenance.",
+      image:
+        "https://cdn.jsdelivr.net/gh/arambhaniti/spmc-content@main/images/services/portfolioManagement.jpg",
       features: [
         "Multi-property asset tracking and reporting",
         "Tenant acquisition and lease negotiations",
@@ -204,7 +216,12 @@ export default function ServicesPage() {
                 <div className={`relative aspect-[4/3] ${index % 2 === 1 ? "md:order-1" : ""}`}>
                   <div className="absolute inset-0 bg-accent/10 rounded-[3rem] rotate-3 transform" />
                   <Image
-                    src={`/service-${index + 1}.jpg?height=600&width=800&query=luxury-real-estate-${service.title.toLowerCase().replace(/\s+/g, "-")}`}
+                    src={
+                      service.image ||
+                      `/service-${index + 1}.jpg?height=600&width=800&query=luxury-real-estate-${service.title
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`
+                    }
                     alt={service.title}
                     fill
                     className="object-cover rounded-[3rem] shadow-2xl"

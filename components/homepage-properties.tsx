@@ -90,12 +90,12 @@ const HOMEPAGE_PROPERTIES: Property[] = [
 
 // Beautiful fallback image component
 const PropertyImageFallback = ({ title }: { title: string }) => (
-  <div className="absolute inset-0 bg-linear-to-br from-accent/20 via-primary/10 to-accent/20 flex items-center justify-center">
+  <div className="absolute inset-0 bg-card flex items-center justify-center">
     <div className="text-center p-8">
-      <Building className="w-16 h-16 mx-auto mb-4 text-accent/60" />
-      <div className="w-24 h-1 bg-accent/30 mx-auto mb-4 rounded-full"></div>
-      <p className="text-accent/80 font-medium text-sm uppercase tracking-wider">{title}</p>
-      <p className="text-accent/60 text-xs mt-2">Image Coming Soon</p>
+      <Building className="w-16 h-16 mx-auto mb-4 text-accent" />
+      <div className="w-24 h-1 bg-accent/40 mx-auto mb-4 rounded-full"></div>
+      <p className="text-foreground/80 font-medium text-sm uppercase tracking-wider">{title}</p>
+      <p className="text-muted-foreground text-xs mt-2">Image Coming Soon</p>
     </div>
   </div>
 )
@@ -122,7 +122,7 @@ export function HomepageProperties() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: (idx % 3) * 0.1 }}
-                className="group cursor-pointer bg-white p-4 rounded-3xl border border-transparent hover:border-accent/10 hover:shadow-2xl transition-all duration-500"
+                className="group cursor-pointer bg-card p-4 rounded-3xl border border-transparent hover:border-accent/10 hover:shadow-2xl transition-all duration-500"
               >
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl mb-6">
                   <Image
@@ -136,15 +136,15 @@ export function HomepageProperties() {
                       const parent = target.parentElement
                       if (parent && !parent.querySelector('.fallback-content')) {
                         const fallbackDiv = document.createElement('div')
-                        fallbackDiv.className = 'fallback-content absolute inset-0 bg-linear-to-br from-accent/20 via-primary/10 to-accent/20 flex items-center justify-center'
+                        fallbackDiv.className = 'fallback-content absolute inset-0 bg-card flex items-center justify-center'
                         fallbackDiv.innerHTML = `
                           <div class="text-center p-8">
-                            <svg class="w-16 h-16 mx-auto mb-4 text-accent/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-16 h-16 mx-auto mb-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
-                            <div class="w-24 h-1 bg-accent/30 mx-auto mb-4 rounded-full"></div>
-                            <p class="text-accent/80 font-medium text-sm uppercase tracking-wider">${prop.title}</p>
-                            <p class="text-accent/60 text-xs mt-2">Image Coming Soon</p>
+                            <div class="w-24 h-1 bg-accent/40 mx-auto mb-4 rounded-full"></div>
+                            <p class="text-foreground/80 font-medium text-sm uppercase tracking-wider">${prop.title}</p>
+                            <p class="text-muted-foreground text-xs mt-2">Image Coming Soon</p>
                           </div>
                         `
                         parent.appendChild(fallbackDiv)
@@ -152,21 +152,21 @@ export function HomepageProperties() {
                     }}
                   />
                   <div className="absolute top-4 left-4 z-10">
-                    <span className="bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full">
+                    <span className="bg-background/90 backdrop-blur-sm px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full">
                       {prop.tag}
                     </span>
                   </div>
                   <div className="absolute top-4 right-4 z-10">
                     <span className={`px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full ${
                       prop.type === 'sale' 
-                        ? 'bg-green-500/90 text-white' 
-                        : 'bg-blue-500/90 text-white'
+                        ? 'bg-green-500/90 text-foreground' 
+                        : 'bg-blue-500/90 text-foreground'
                     }`}>
                       {prop.type === 'sale' ? 'FOR SALE' : 'FOR LEASE'}
                     </span>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                    <span className="text-white font-bold text-sm flex items-center gap-2">
+                    <span className="text-foreground font-bold text-sm flex items-center gap-2">
                       View Details <ArrowRight className="w-4 h-4" />
                     </span>
                   </div>
@@ -187,7 +187,7 @@ export function HomepageProperties() {
         </div>
 
         <div className="mt-16 flex justify-center">
-          <Link href="/properties" className="group flex items-center gap-3 px-8 py-4 bg-white border border-border rounded-full font-medium hover:bg-primary hover:text-white transition-all">
+          <Link href="/properties" className="group flex items-center gap-3 px-8 py-4 bg-card border border-border rounded-full font-medium hover:bg-primary hover:text-primary-foreground transition-all">
             See All Properties
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>

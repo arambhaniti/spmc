@@ -59,19 +59,19 @@ export function Hero() {
                     </span>
                   ))}
                 </h1>
-                <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto md:mx-0 leading-relaxed mb-10 text-justify">
+                <p className="text-white text-lg md:text-xl text-foreground/90 max-w-2xl mx-auto md:mx-0 leading-relaxed mb-10 text-justify">
                   Expertly navigating the luxury real estate market to find your next architectural masterpiece.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 sm:gap-6">
                   <Link 
                     href={URLS.PROPERTIES}
-                    className="px-8 py-4 bg-accent text-white rounded-full font-medium hover:scale-105 transition-transform shadow-lg inline-block"
+                    className="px-8 py-4 bg-accent text-accent-foreground rounded-full font-medium hover:scale-105 transition-transform shadow-lg inline-block"
                   >
                     View Properties
                   </Link>
                   <Link
                     href={URLS.CONTACT}
-                    className="text-sm font-bold uppercase tracking-widest border-b-2 border-accent text-white pb-1 hover:text-accent transition-colors"
+                    className="text-white text-sm font-bold uppercase tracking-widest border-b-2 border-accent text-foreground pb-1 hover:text-accent transition-colors"
                   >
                     Contact Us
                   </Link>
@@ -103,7 +103,7 @@ export function Hero() {
       </div>
 
       {/* Background Decorative Text */}
-      <div className="absolute top-1/2 -right-20 -translate-y-1/2 rotate-90 text-[15vw] font-serif font-bold opacity-[0.03] select-none pointer-events-none text-white">
+      <div className="absolute top-1/2 -right-20 -translate-y-1/2 rotate-90 text-[15vw] font-serif font-bold opacity-[0.03] select-none pointer-events-none text-foreground">
         ESTATE
       </div>
     </section>

@@ -50,7 +50,7 @@ export function Expertise() {
             </p>
             <Link 
               href={URLS.SERVICES}
-              className="px-10 py-5 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-transform shadow-xl inline-block"
+              className="px-10 py-5 bg-primary text-primary-foreground rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-transform shadow-xl inline-block"
             >
               Explore Services
             </Link>
@@ -64,7 +64,7 @@ export function Expertise() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-10 bg-white rounded-[2rem] border border-accent/5 hover:border-accent/20 transition-all hover:shadow-2xl group"
+                className="p-10 bg-card rounded-[2rem] border border-accent/5 hover:border-accent/20 transition-all hover:shadow-2xl group"
               >
                 <item.icon className="w-10 h-10 text-accent mb-8 group-hover:scale-110 transition-transform" />
                 <h3 className="text-2xl font-serif font-bold mb-4">{item.title}</h3>
