@@ -8,7 +8,7 @@ import { URLS } from '@/config/urls'
 
 export function About() {
   return (
-    <section id="about" className="py-4 md:py-32 overflow-hidden bg-white">
+    <section id="about" className="py-4 md:py-32 overflow-hidden bg-background">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-24 items-center">
           <div className="relative">
@@ -32,7 +32,7 @@ export function About() {
             </div>
             <motion.div
               whileHover={{ scale: 1.1 }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-accent rounded-full flex flex-col items-center justify-center text-white font-serif shadow-2xl border-8 border-background z-10"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-accent rounded-full flex flex-col items-center justify-center text-accent-foreground font-serif shadow-2xl border-8 border-card z-10"
             >
               <span className="text-4xl font-bold">S.K</span>
               <span className="text-[8px] uppercase tracking-[0.3em] font-bold mt-1">Est. 2011</span>
@@ -77,7 +77,7 @@ export function About() {
 
             <Link 
               href={URLS.ABOUT}
-              className="group px-10 py-5 border-2 border-primary rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-primary hover:text-white transition-all flex items-center gap-4 inline-block"
+              className="group px-10 py-5 border-2 border-primary rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-primary hover:text-primary-foreground transition-all flex items-center gap-4 inline-block"
             >
               Our Full Story <span className="group-hover:translate-x-2 transition-transform">→</span>
             </Link>

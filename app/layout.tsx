@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ScrollToTop } from "@/components/scroll-to-top" // added scroll restorer
-import { ThemeToggle } from "@/components/theme-toggle"
 import { COMPANY_NAME } from '@/config/constants'
 import "./globals.css"
 
@@ -27,7 +26,6 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground overflow-x-hidden`}
       >
-        <ThemeToggle />
         <ScrollToTop />
         {children}
         <Analytics />

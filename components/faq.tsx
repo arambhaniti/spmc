@@ -32,7 +32,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section className="py-32 bg-white">
+    <section className="py-32 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <span className="text-accent font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">
